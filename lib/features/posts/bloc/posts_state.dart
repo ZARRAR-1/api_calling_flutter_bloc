@@ -14,7 +14,12 @@ class PostLoadingState extends PostsState {}
 
 class PostErrorState extends PostsState {}
 
-class PostFetchSuccessState extends PostsState {}
+class PostFetchSuccessState extends PostsState {
+
+  final List<PostModel> myPosts;
+
+  PostFetchSuccessState({required this.myPosts});
+}
 
 //Action States
 class PostAddSuccessState extends PostsActionState {}
