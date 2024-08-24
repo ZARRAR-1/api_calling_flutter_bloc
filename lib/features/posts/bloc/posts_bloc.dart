@@ -18,7 +18,9 @@ class PostsBloc extends Bloc<PostsEvent, PostsState> {
 
   Future<void> postsFetchEvent(
       PostsFetchEvent event, Emitter<PostsState> emit) async {
-     List<PostModel> fetched_posts = [];
+    emit(PostFetchLoadingState());
+
+    List<PostModel> fetchedPosts = [];
 
     var client = http.Client();
     try {
@@ -26,6 +28,7 @@ class PostsBloc extends Bloc<PostsEvent, PostsState> {
         Uri.parse('https://jsonplaceholder.typicode.com/posts'),
       );
 
+      //Parses the String Array and returns the resulting list of Json objects
       final List<dynamic> jsonArray = jsonDecode(response.body);
 
       // Replaced this:
@@ -35,15 +38,10 @@ class PostsBloc extends Bloc<PostsEvent, PostsState> {
       //   }
 
       //With this:
-      fetched_posts = jsonArray.map((jsonItem) => PostModel.fromJson(jsonItem)).toList();
+      fetchedPosts =
+          jsonArray.map((jsonItem) => PostModel.fromJson(jsonItem)).toList();
 
-      emit( PostFetchSuccessState());
-
-
-
-
-
-
+      emit(PostFetchSuccessState(myPosts: fetchedPosts));
 
     } finally {
       client.close();

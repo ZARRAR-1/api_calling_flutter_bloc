@@ -8,9 +8,7 @@ abstract class PostsActionState {}//self-made
 final class PostsInitial extends PostsState {} //Auto generated
 
 //Non-Action States
-class PostFetchingState extends PostsState {}
-
-class PostLoadingState extends PostsState {}
+class PostFetchLoadingState extends PostsState {}
 
 class PostErrorState extends PostsState {}
 
