@@ -1,9 +1,9 @@
 part of 'posts_bloc.dart';
 
 @immutable
-sealed class PostsState {} //Auto generated
+abstract class PostsState {} //Auto generated
 
-abstract class PostsActionState {}//self-made
+abstract class PostsActionState extends PostsState {} //self-made
 
 final class PostsInitial extends PostsState {} //Auto generated
 
@@ -13,7 +13,6 @@ class PostFetchLoadingState extends PostsState {}
 class PostErrorState extends PostsState {}
 
 class PostFetchSuccessState extends PostsState {
-
   final List<PostModel> myPosts;
 
   PostFetchSuccessState({required this.myPosts});
@@ -23,4 +22,3 @@ class PostFetchSuccessState extends PostsState {
 class PostAddSuccessState extends PostsActionState {}
 
 class PostAddFailureState extends PostsActionState {}
-
